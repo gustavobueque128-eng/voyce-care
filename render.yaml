@@ -1,0 +1,21 @@
+# Configuração do Render (Blueprint). No painel: New > Blueprint > escolha este repositório.
+services:
+  - type: web
+    name: voyce-care
+    runtime: node
+    plan: free            # gratuito: o disco é apagado a cada reinício/atualização (a demonstração é recriada)
+    region: virginia
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/setup
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: TZ
+        value: America/Sao_Paulo
+      - key: VOYCE_DEMO        # cria os dados fictícios quando o banco está vazio
+        value: "1"
+      - key: VOYCE_ADMIN_SENHA # senha da conta "admin" da demonstração
+        value: admin
+      - key: VOYCE_DEMO_SENHA  # senha das contas fictícias (carla, ana, bruno, paula)
+        value: demo1234
